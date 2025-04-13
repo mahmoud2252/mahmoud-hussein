@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="stayel.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+  <title>مطعم ملك المشويات - قائمة الطعام</title>
+  <style>
+   .add-to-cart-btn {
+      background-color: #d35400;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .cart {
+      background: #f8f8f8;
+      border-top: 2px solid #ccc;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    .cart h3 {
+      margin-top: 0;
+    }
+
+    .cart ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-item {
+      margin: 5px 0;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .floating-cart {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #d35400;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    #cart-count {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: red;
+      color: white;
+      font-size: 14px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    .cart-details {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      width: 280px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .cart-details.active {
+      display: block;
+    }
+
+    .cart-form input {
+      width: 100%;
+      margin: 5px 0;
+      padding: 5px;
+    }
+
+    .cart-form button {
+      background-color: #27ae60;
+      color: white;
+      padding: 8px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      .logo h1 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+}
+}
+
+
+</style>
+
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <div class="logo">
+      <img src="WhatsApp Image 2025-04-06 at 22.11.56_38926b46.jpg" alt="لوجو المطعم" />
+      <h1>ملك المشويات</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">الرئيسية</a></li>
+        <li class="dropdowen">
+          <a href="#menu">المنيو</a>
+          <ul class="sub_ul">
+            <li><a href="#menu">أطباق مشوية</a></li>
+            <li><a href="#menu2">أطباق جانبية</a></li>
+            <li><a href="#menu3">أطباق مميزة</a></li>
+            <li><a href="#menu4">المشروبات</a></li>
+          </ul>
+        </li>
+        <li><a href="#about">عن المطعم</a></li>
+        <li><a href="#sendmaseg">طلب الاوردر</a></li>
+        <li><a href="#contact">اتصل بنا</a></li>
+      </ul>
+    </nav>
+    
+  </header>
+<!-- قسم الترحيب (Hero Section) -->
+<section style="background-color: #f1f1f1; text-align: center; padding: 100px 20px; font-family: 'Arial', sans-serif;">
+  <p style="font-size: 22px; margin-bottom: 10px; color: #333;">اهلا بك في مطعم ملك المشويات</p>
+  <h1 style="font-size: 50px; margin-bottom: 20px; font-weight: bold; color: #000;">أشهى الأطباق في انتظارك</h1>
+  <p style="font-size: 22px; margin-bottom: 40px; color: #444;">استمتع بأفضل الأطباق مع العائلة والأصدقاء</p>
+  <a href="#menu" style="background-color: #0d1b2a; color: white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 18px;">قائمة الطعام</a>
+</section>
+
+  <!-- المنيو -->
+  <section id="menu" class="menu">
+    <div class="menu-section">
+      <h2>أطباق مشوية</h2>
+      <div class="dash">
+        <div class="start-1"></div>
+        <div class="start-2"></div>
+        <div class="start-3"></div>
+      </div>
+      <div class="menu-item-container">
+        <div class="menu-item"><span>كيلو كفتة مشوية</span><span>250 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('كيلو كفتة مشوية', 250)">أضف</button></div>
+        <div class="menu-item"><span>1/4 دجاج مشوي على الفحم</span><span>120 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('1/4 دجاج مشوي', 120)">أضف</button></div>
+        <div class="menu-item"><span>1/2 كيلو كباب لحم مشوي</span><span>260 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('1/4 كيلو كباب', 260)">أضف</button></div>
+        <div class="menu-item"><span>4 شيش طاووق</span><span>150 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('4 شيش طاووق', 150)">أضف</button></div>
+        <div class="menu-item"><span>1/2 ريش ضأن مشوية</span><span>400 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('1/2 ريش ضأن', 400)">أضف</button></div>
+        <div class="menu-item"><span>قطعة استيك مشوي</span><span>300 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('استيك مشوي', 300)">أضف</button></div>
+        <div class="menu-item"><span>1/2 كيلو فراخ مشوية</span><span>180 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('1/2 كيلو فراخ', 180)">أضف</button></div>
+        <div class="menu-item"><span>1/4 سجق مشوي</span><span>150 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('1/4 سجق مشوي', 150)">أضف</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- أطباق جانبية -->
+  <section id="menu2" class="menu">
+    <div class="menu-section">
+      <h2>أطباق جانبية</h2>
+      <div class="dash">
+        <div class="start-1"></div>
+        <div class="start-2"></div>
+        <div class="start-3"></div>
+      </div>
+      <div class="menu-item-container">
+        <div class="menu-item"><span>بطاطس مشوية</span><span>50 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('بطاطس مشوية', 50)">أضف</button></div>
+        <div class="menu-item"><span>سلطة طحينة</span><span>30 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('سلطة طحينة', 30)">أضف</button></div>
+        <div class="menu-item"><span>سلطة زبادي بالنعناع</span><span>50 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('سلطة زبادي بالنعناع', 50)">أضف</button></div>
+        <div class="menu-item"><span>رز مشوي</span><span>100 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('رز مشوي', 100)">أضف</button></div>
+        <div class="menu-item"><span>خبز مشوي بالزبدة</span><span>40 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('خبز مشوي بالزبدة', 40)">أضف</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- أطباق مميزة -->
+  <section id="menu3" class="menu">
+    <div class="menu-section">
+      <h2>أطباق مميزة</h2>
+      <div class="dash">
+        <div class="start-1"></div>
+        <div class="start-2"></div>
+        <div class="start-3"></div>
+      </div>
+      <div class="menu-item-container">
+        <div class="menu-item"><span>ساندوتش شاورما مشوية</span><span>100 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('ساندوتش شاورما مشوية', 100)">أضف</button></div>
+        <div class="menu-item"><span>ساندوتش برجر مشوي</span><span>150 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('ساندوتش برجر مشوي', 150)">أضف</button></div>
+        <div class="menu-item"><span>طاجن لحم مشوي</span><span>250 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('طاجن لحم مشوي', 250)">أضف</button></div>
+        <div class="menu-item"><span>1/2 كباب المندي</span><span>400 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('1/2 كباب المندي', 400)">أضف</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- المشروبات -->
+  <section id="menu4" class="menu">
+    <div class="menu-section">
+      <h2>المشروبات</h2>
+      <div class="dash">
+        <div class="start-1"></div>
+        <div class="start-2"></div>
+        <div class="start-3"></div>
+      </div>
+      <div class="menu-item-container">
+        <div class="menu-item"><span>عصير لمون نعناع</span><span>30 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('عصير لمون نعناع', 30)">أضف</button></div>
+        <div class="menu-item"><span>عصير مانجا</span><span>50 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('عصير مانجا', 50)">أضف</button></div>
+        <div class="menu-item"><span>مشروب غازي (ماكس كولا - أناناس - تفاح - لمون نعناع)</span><span>20 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('مشروب غازي', 20)">أضف</button></div>
+        <div class="menu-item"><span>زجاجة مياه</span><span>30 جنيه</span><button class="add-to-cart-btn" onclick="addToCart('زجاجة مياه', 30)">أضف</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- سلة المشتريات -->
+  <div class="floating-cart" onclick="toggleCartDetails()">
+    🛒
+    <span id="cart-count">0</span>
+  </div>
+  
+  <div class="cart-details" id="cart">
+    <h3>سلة المشتريات</h3>
+    <ul id="cart-items"></ul>
+    <p class="total">الإجمالي: <span id="cart-total">0</span> جنيه</p>
+  
+    <div class="cart-form">
+      <input type="text" placeholder="الاسم" id="customer-name" />
+      <input type="text" placeholder="رقم الهاتف" id="customer-phone" />
+      <input type="text" placeholder="العنوان" id="customer-address" />
+      <button onclick="submitOrder()">إرسال الطلب</button>
+    </div>
+  </div>
+  
+  
+  </script>
+
+  
+  <!-- عن المطعم -->
+  <section id="about" class="about">
+    <h2>عن مطعم ملك المشويات</h2>
+    <div class="dash">
+      <div class="start-1"></div>
+      <div class="start-2"></div>
+      <div class="start-3"></div>
+    </div>
+    <img src="WhatsApp Image 2025-04-06 at 22.11.56_38926b46.jpg" alt="" />
+    <p>مطعم ملك المشويات هو المكان المثالي لتناول الطعام مع العائلة<br />أو الأصدقاء نقدم أفضل الأطباق في جو مريح وأنيق.</p>
+  </section>
+
+
+  <!-- تواصل معنا -->
+  <section id="contact" class="contact">
+    <h2>اتصل بنا</h2>
+    <p>للحجز أو الاستفسار، اتصل بنا على الرقم التالي:</p>
+    <p>01114042655</p>
+  </section>
+  <section class="team" style="text-align: center; padding: 30px 10px; background-color: #f3f3f3; margin-top: 40px;">
+    <h3 style="margin-bottom: 10px; font-size: 20px; color: #d35400;">تم تنفيذ هذا المشروع بواسطه</h3>
+    <p style="font-size: 18px; color: #333;">محمود حسين محمود عويس - نهي جمال غانم علي</p>
+  </section>
+  
+  <footer style="background-color: #222; padding: 15px 0;">
+    <p style="text-align: center; font-size: 16px; color: #fff; margin: 0;">
+      جميع الحقوق محفوظة © 2025 - مطعم ملك المشويات
+    </p>
+  </footer>
+  
+  
+  <script>
+    let cartItems = [];
+  
+    function addToCart(name, price) {
+      cartItems.push({ name, price });
+      updateCart();
+    }
+  
+    function updateCart() {
+      const cartList = document.getElementById("cart-items");
+      const totalDisplay = document.getElementById("cart-total");
+      const cartCount = document.getElementById("cart-count");
+  
+      cartList.innerHTML = '';
+      let total = 0;
+  
+      cartItems.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "cart-item";
+        li.textContent = `${item.name} - ${item.price} جنيه`;
+        cartList.appendChild(li);
+        total += item.price;
+      });
+  
+      totalDisplay.textContent = total;
+      cartCount.textContent = cartItems.length;
+    }
+  
+    function toggleCartDetails() {
+      document.getElementById("cart").classList.toggle("active");
+    }
+  
+    function submitOrder() {
+      const name = document.getElementById("customer-name").value;
+      const phone = document.getElementById("customer-phone").value;
+      const address = document.getElementById("customer-address").value;
+  
+      if (!name || !phone || !address) {
+        alert("من فضلك أدخل جميع البيانات.");
+        return;
+      }
+  
+      let orderSummary = "طلب جديد:\n";
+      cartItems.forEach(item => {
+        orderSummary += `- ${item.name} - ${item.price} جنيه\n`;
+      });
+      orderSummary += `\nالإجمالي: ${document.getElementById("cart-total").textContent} جنيه\n`;
+      orderSummary += `\nالاسم: ${name}\nرقم الهاتف: ${phone}\nالعنوان: ${address}`;
+  
+      alert(orderSummary);
+  
+      // تفريغ السلة
+      cartItems = [];
+      updateCart();
+      document.getElementById("customer-name").value = "";
+      document.getElementById("customer-phone").value = "";
+      document.getElementById("customer-address").value = "";
+      toggleCartDetails();
+    }
+  </script>
+  
+  </body>
+  </html>
+  
